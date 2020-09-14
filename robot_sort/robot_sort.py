@@ -96,8 +96,41 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # Fill this out:
+        # going to use the Bubble Sort method since it can compare two items
+        # at a time in a list and can swap them easily and go to the next
+        # ones until the end of the list and come back to repeat
+
+        # in a while loop check to see if the light is not on then turn it on
+        while not self.light_is_on():
+            self.set_light_on()
+
+            # in a while loop go through the items starting from left if possible
+            # and compare each items, if the current item is greater than
+            # the next item then swap them, turn the light off and continue going to
+            # the right
+            while self.can_move_right():
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+                    self.set_light_off()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+
+            # and once it reaches the end, in another while loop go back to the left
+            # if possible and check if the current item is less than the previous item then
+            # swap them, turn the light off and  keep moving to the left
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    self.set_light_off()
+                self.move_right()
+                self.swap_item()
+                self.move_left()
 
 
 if __name__ == "__main__":
